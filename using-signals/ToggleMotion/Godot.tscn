@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cliegokiti430"]
+
+[ext_resource type="Texture2D" uid="uid://cwjmn4p2yr36r" path="res://ToggleMotion/icon.png" id="1"]
+[ext_resource type="Script" path="res://ToggleMotion/Godot.gd" id="2"]
+
+[node name="Godot" type="Sprite2D"]
+position = Vector2(521, 314)
+texture = ExtResource("1")
+script = ExtResource("2")

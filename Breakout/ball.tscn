@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjq6cwmd88tk5"]
+
+[ext_resource type="Texture2D" uid="uid://datc7c3mwtlew" path="res://assets/Ball.png" id="1_grscn"]
+[ext_resource type="Script" path="res://ball.gd" id="1_pkugx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eis8w"]
+radius = 20.0
+
+[node name="Ball" type="RigidBody2D"]
+collision_mask = 30
+gravity_scale = 0.0
+script = ExtResource("1_pkugx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eis8w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -0.5)
+scale = Vector2(0.092, 0.092)
+texture = ExtResource("1_grscn")
+
+[node name="AccelTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="AccelTimer" to="." method="_on_accel_timer_timeout"]

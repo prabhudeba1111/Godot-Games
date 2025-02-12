@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqw6otj2djips"]
+
+[ext_resource type="PackedScene" uid="uid://b76kx0tup14vv" path="res://ball.tscn" id="1_gho47"]
+[ext_resource type="PackedScene" uid="uid://bkv7u870kv6hb" path="res://paddle.tscn" id="1_pafsd"]
+[ext_resource type="Script" path="res://main.gd" id="1_vpu1h"]
+[ext_resource type="FontFile" uid="uid://cmh68fet10ro" path="res://fonts/xolonium-regular.ttf" id="4_1xbtv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4j0oh"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_suek6"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t41r0"]
+size = Vector2(39, 720)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vpu1h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.247059, 0.921569, 1)
+
+[node name="Top_Wall" type="StaticBody2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top_Wall"]
+position = Vector2(640, -40)
+shape = SubResource("RectangleShape2D_4j0oh")
+
+[node name="Bottom_Wall" type="StaticBody2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom_Wall"]
+position = Vector2(640, 760)
+shape = SubResource("RectangleShape2D_suek6")
+
+[node name="LeftScore" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftScore"]
+position = Vector2(19.5, 360)
+shape = SubResource("RectangleShape2D_t41r0")
+
+[node name="RightScore" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightScore"]
+position = Vector2(1261, 359)
+shape = SubResource("RectangleShape2D_t41r0")
+
+[node name="Ball" parent="." instance=ExtResource("1_gho47")]
+position = Vector2(640, 360)
+
+[node name="Paddle_Left" parent="." instance=ExtResource("1_pafsd")]
+position = Vector2(80, 360)
+
+[node name="Paddle_Right" parent="." instance=ExtResource("1_pafsd")]
+position = Vector2(1200, 360)
+rotation = -3.14159
+up_direction = Vector2(0, 1)
+left_side = false
+
+[node name="GameTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 320.0
+offset_right = 1281.0
+offset_bottom = 398.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.286275, 0.756863, 1, 1)
+theme_override_fonts/font = ExtResource("4_1xbtv")
+theme_override_font_sizes/font_size = 75
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="LeftScore" to="." method="_on_left_score_body_entered"]
+[connection signal="area_entered" from="RightScore" to="." method="_on_right_score_area_entered"]
+[connection signal="body_entered" from="RightScore" to="." method="_on_right_score_body_entered"]
