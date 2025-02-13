@@ -56,7 +56,6 @@ func _process(delta: float) -> void:
 
 func _on_pipe_timer_timeout() -> void:
 	generate_pipes()
-	print("now")
 
 func generate_pipes():
 	var pipe = pipe_scene.instantiate()
