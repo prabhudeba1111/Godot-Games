@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const GRAVITY :int = 1000
 const MAX_SPEED :int = 600
 const FLAP_SPEED :int = -500

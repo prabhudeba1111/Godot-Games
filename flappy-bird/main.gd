@@ -13,7 +13,6 @@ var pipes :Array
 const PIPE_DELAY :int = 100
 const PIPE_RANGE :int = 200
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_window().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
@@ -47,9 +46,7 @@ func start_game():
 	$Bird.flap()
 	$PipeTimer.start()
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#print("flying: ", $Bird.flying, "\tfalling: ", $Bird.falling)
 	if game_running:
 		scroll += SCROLL_SPEED * delta
 		if scroll >= screen_size.x:
@@ -62,7 +59,6 @@ func _on_pipe_timer_timeout() -> void:
 	generate_pipes()
 
 func check_top():
-	#print($Bird.position.y)
 	if $Bird.position.y <= 21:
 		$Bird.falling = true
 		stop_game()
@@ -94,7 +90,6 @@ func _on_ground_hit() -> void:
 func scored():
 	score += 1
 	$ScoreLabel.text = "SCORE : " + str(score)
-
 
 func _on_game_over_restart() -> void:
 	new_game()
