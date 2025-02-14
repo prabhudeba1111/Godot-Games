@@ -6,7 +6,7 @@ var game_running :bool
 var game_over :bool
 var scroll
 var score
-const SCROLL_SPEED :int = 2
+const SCROLL_SPEED :float = 250
 var screen_size :Vector2
 var ground_height :int
 var pipes :Array
@@ -43,16 +43,15 @@ func start_game():
 	$Bird.flap()
 	$PipeTimer.start()
 	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if game_running:
-		scroll += SCROLL_SPEED
+		scroll += SCROLL_SPEED * delta
 		if scroll >= screen_size.x:
 			scroll = 0
 		$Ground.position.x = -scroll
 		for pipe in pipes:
-			pipe.position.x -= SCROLL_SPEED
+			pipe.position.x -= SCROLL_SPEED * delta
 
 func _on_pipe_timer_timeout() -> void:
 	generate_pipes()
