@@ -24,6 +24,9 @@ func new_game():
 	game_running = false
 	score = 0
 	scroll = 0
+	$GameOver.hide()
+	$ScoreLabel.text = "SCORE : " + str(score)
+	get_tree().call_group("pipes", "queue_free")
 	pipes.clear()
 	generate_pipes()
 	$Bird.reset()
@@ -36,6 +39,7 @@ func _input(event: InputEvent) -> void:
 					start_game()
 				elif $Bird.flying:
 					$Bird.flap()
+					check_top()
 
 func start_game():
 	game_running = true
@@ -45,6 +49,7 @@ func start_game():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#print("flying: ", $Bird.flying, "\tfalling: ", $Bird.falling)
 	if game_running:
 		scroll += SCROLL_SPEED * delta
 		if scroll >= screen_size.x:
@@ -56,13 +61,40 @@ func _process(delta: float) -> void:
 func _on_pipe_timer_timeout() -> void:
 	generate_pipes()
 
+func check_top():
+	#print($Bird.position.y)
+	if $Bird.position.y <= 21:
+		$Bird.falling = true
+		stop_game()
+
+func stop_game():
+	$PipeTimer.stop()
+	$GameOver.show()
+	$Bird.flying = false
+	game_over = true
+	game_running = false
+
 func generate_pipes():
 	var pipe = pipe_scene.instantiate()
 	pipe.position.x = screen_size.x + PIPE_DELAY
 	pipe.position.y = (screen_size.y - ground_height)/2 + randi_range(-PIPE_RANGE, PIPE_RANGE)
 	add_child(pipe)
 	pipe.hit.connect(bird_hit)
+	pipe.scored.connect(scored)
 	pipes.append(pipe)
 
 func bird_hit():
-	pass
+	$Bird.falling = true
+	stop_game()
+
+func _on_ground_hit() -> void:
+	$Bird.falling = false
+	stop_game()
+
+func scored():
+	score += 1
+	$ScoreLabel.text = "SCORE : " + str(score)
+
+
+func _on_game_over_restart() -> void:
+	new_game()
