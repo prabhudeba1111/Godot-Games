@@ -40,6 +40,54 @@ const enemies := {
 	}
 }
 
+const towers := {
+	"sniper": {
+		"stats": {
+			"damage": 150,
+			"attack_speed": 0.5,
+			"attack_range": 10.0,
+			"bulletSpeed": 1500.0,
+		},
+		"upgrades": {
+			"damage": {"amount": 2.5, "multiplies": false},
+			"attack_speed": {"amount": 1.5, "multiplies": true},
+		},
+		"name": "Sniper Turret",
+		"cost": 90,
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile249.png",
+	},
+		"machineGun": {
+		"stats": {
+			"damage": 350,
+			"attack_speed": 1.5,
+			"attack_range": 6.0,
+			"bulletSpeed": 800.0,
+		},
+		"upgrades": {
+			"damage": {"amount": 2.5, "multiplies": false},
+			"attack_speed": {"amount": 1.5, "multiplies": true},
+		},
+		"name": "Machine Gun Turret",
+		"cost": 70,
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile250.png",
+	},
+}
+
+const tower_level := {
+	"1":{
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile183.png"
+	},
+	"2":{
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile182.png"
+	},
+	"3":{
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile181.png"
+	},
+	"4":{
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile180.png"
+	}
+}
+
 const levels := {
 	"level1": {
 		"scene": "res://Levels/level1.tscn",

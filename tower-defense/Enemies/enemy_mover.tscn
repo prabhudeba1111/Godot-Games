@@ -10,7 +10,7 @@ radius = 13.0384
 loop = false
 script = ExtResource("1_odxjt")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="CharacterBody2D" parent="." groups=["Enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_i7aul")

@@ -24,6 +24,22 @@ func _process(delta: float) -> void:
 		finished_path()
 
 func finished_path():
-	print(baseDamage)
 	get_parent().get_parent().base_damaged(baseDamage)
 	queue_free()
+
+func take_damage(damage):
+	hp -= damage
+	damage_animation()
+	if hp <= 0:
+		# give gold
+		queue_free()
+
+func damage_animation():
+	var tween := create_tween()
+	tween.tween_property(self, "v_offset", 0, 0.05)
+	tween.tween_property(self, "modulate", Color.ORANGE_RED, 0.1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.3)
+	tween.set_parallel()
+	tween.tween_property(self, "v_offset", -5, 0.2)
+	tween.set_parallel(false)
+	tween.tween_property(self, "v_offset", 0, 0.2)
