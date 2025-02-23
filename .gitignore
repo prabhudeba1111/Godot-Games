@@ -15,3 +15,5 @@ data_*/
 mono_crash.*.json
 
 tower-defense-game-template
+using-signals
+instancing
