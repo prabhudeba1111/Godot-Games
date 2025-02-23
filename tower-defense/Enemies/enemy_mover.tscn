@@ -7,6 +7,7 @@
 radius = 13.0384
 
 [node name="EnemyMover" type="PathFollow2D"]
+loop = false
 script = ExtResource("1_odxjt")
 
 [node name="Area2D" type="Area2D" parent="."]

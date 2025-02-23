@@ -12,13 +12,18 @@ var goldYield :int
 var hp :int
 var baseDamage :int
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	v_offset = randf_range(-10, 10)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	progress += speed * delta
+	progress_ratio += 0.0005 * speed * delta
+	#print(progress_ratio)
 	if progress_ratio == 1:
-		queue_free()
+		finished_path()
+
+func finished_path():
+	print(baseDamage)
+	get_parent().get_parent().base_damaged(baseDamage)
+	queue_free()
