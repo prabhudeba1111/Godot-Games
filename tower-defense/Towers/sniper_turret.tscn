@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy7eqioebvag8"]
+
+[ext_resource type="Script" path="res://Towers/sniper_turret.gd" id="1_7vsmt"]
+[ext_resource type="Texture2D" uid="uid://c1nklj01g3kr6" path="res://Tilesheet/PNG/towerDefense_tile183.png" id="1_cbmmg"]
+[ext_resource type="Texture2D" uid="uid://byswovvceeejr" path="res://Tilesheet/PNG/towerDefense_tile249.png" id="3_rygvy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_da2vk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kn3cr"]
+
+[node name="SniperTurret" type="StaticBody2D"]
+script = ExtResource("1_7vsmt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.2, 3.2)
+shape = SubResource("RectangleShape2D_da2vk")
+
+[node name="Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+scale = Vector2(35, 35)
+shape = SubResource("CircleShape2D_kn3cr")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_cbmmg")
+
+[node name="Turret" type="Sprite2D" parent="."]
+texture = ExtResource("3_rygvy")
+
+[node name="FirePoint" type="Marker2D" parent="Turret"]
+position = Vector2(-1.26763e-06, -29)
+rotation = -1.5708
+
+[node name="AttackCD" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="timeout" from="AttackCD" to="." method="_on_attack_cd_timeout"]

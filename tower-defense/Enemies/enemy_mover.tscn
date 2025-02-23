@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://xvegxxvn3rdd"]
+
+[ext_resource type="Script" path="res://Enemies/enemy_mover.gd" id="1_odxjt"]
+[ext_resource type="Texture2D" uid="uid://dlfcpe4x57u44" path="res://Tilesheet/PNG/towerDefense_tile270.png" id="2_ynn7e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i7aul"]
+radius = 13.0384
+
+[node name="EnemyMover" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_odxjt")
+
+[node name="Area2D" type="CharacterBody2D" parent="." groups=["Enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_i7aul")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ynn7e")

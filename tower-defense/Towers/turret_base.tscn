@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxgiv0q1m0ryb"]
+
+[ext_resource type="Texture2D" uid="uid://c1nklj01g3kr6" path="res://Tilesheet/PNG/towerDefense_tile183.png" id="1_juuth"]
+[ext_resource type="Script" path="res://Towers/turret_base.gd" id="1_ut6jf"]
+[ext_resource type="PackedScene" uid="uid://dbb1ra66pk2h5" path="res://Towers/turret_body.tscn" id="2_hw2fl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aukfy"]
+
+[node name="TurretBase" type="StaticBody2D"]
+script = ExtResource("1_ut6jf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.2, 3.2)
+shape = SubResource("RectangleShape2D_aukfy")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_juuth")
+
+[node name="TurretBody" parent="." instance=ExtResource("2_hw2fl")]
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="AttackCD" type="Timer" parent="."]
+
+[connection signal="timeout" from="AttackCD" to="." method="_on_attack_cd_timeout"]
