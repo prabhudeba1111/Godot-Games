@@ -17,9 +17,3 @@ shape = SubResource("RectangleShape2D_aukfy")
 texture = ExtResource("1_juuth")
 
 [node name="TurretBody" parent="." instance=ExtResource("2_hw2fl")]
-
-[node name="Projectiles" type="Node2D" parent="."]
-
-[node name="AttackCD" type="Timer" parent="."]
-
-[connection signal="timeout" from="AttackCD" to="." method="_on_attack_cd_timeout"]

@@ -43,7 +43,7 @@ const enemies := {
 const towers := {
 	"sniper": {
 		"stats": {
-			"damage": 150,
+			"attack_damage": 150,
 			"attack_speed": 0.5,
 			"attack_range": 10.0,
 			"bulletSpeed": 1500.0,
@@ -58,7 +58,7 @@ const towers := {
 	},
 		"machineGun": {
 		"stats": {
-			"damage": 350,
+			"attack_damage": 350,
 			"attack_speed": 1.5,
 			"attack_range": 6.0,
 			"bulletSpeed": 800.0,
