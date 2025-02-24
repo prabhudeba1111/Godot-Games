@@ -6,7 +6,7 @@ var target :CharacterBody2D = null
 var turret :StaticBody2D
 
 func _ready() -> void:
-	turret = get_parent().get_parent()
+	turret = get_parent().get_parent().get_parent()
 	speed = turret.bulletSpeed
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
