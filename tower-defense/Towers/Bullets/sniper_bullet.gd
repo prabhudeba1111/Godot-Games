@@ -15,9 +15,10 @@ func _process(delta: float) -> void:
 		var direction = (target.global_position - global_position).normalized()
 		look_at(target.global_position)
 		global_position += direction * speed * delta
-		
 		if global_position.distance_to(target.global_position) < 5:
 			hit_target()
+	else:
+		queue_free()
 
 func hit_target():
 	var damage = turret.attack_damage
