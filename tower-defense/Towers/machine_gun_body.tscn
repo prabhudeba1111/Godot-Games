@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgxapymqr7bgk"]
+
+[ext_resource type="Script" path="res://Towers/turret_body.gd" id="1_xtome"]
+[ext_resource type="Texture2D" uid="uid://dvr8unns3tr1r" path="res://Tilesheet/PNG/towerDefense_tile250.png" id="2_rqsym"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_praf1"]
+
+[node name="TurretBody" type="StaticBody2D"]
+script = ExtResource("1_xtome")
+
+[node name="Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+scale = Vector2(35, 35)
+shape = SubResource("CircleShape2D_praf1")
+
+[node name="Body" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_rqsym")
+
+[node name="FirePoint1" type="Marker2D" parent="."]
+position = Vector2(32, -6)
+
+[node name="FirePoint2" type="Marker2D" parent="."]
+position = Vector2(32, 6)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="AttackCD" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="timeout" from="AttackCD" to="." method="_on_attack_cd_timeout"]

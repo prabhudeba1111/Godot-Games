@@ -4,7 +4,11 @@ class_name TurretBase
 var turret_type := "":
 	set(value):
 		turret_type = value
-		$TurretBody/Sprite2D.texture = load(GameData.towers[value]["sprite"])
+		var bodyscene = load(GameData.towers[value]["scene"])
+		var Body = bodyscene.instantiate()
+		add_child(Body)
+		Body.bullet_scene = load(GameData.towers[value]["bullet"])
+		Body.set_script(load("res://Towers/turret_body.gd"))
 		for stat in GameData.towers[value]["stats"].keys():
 			set(stat, GameData.towers[value]["stats"][stat])
 		

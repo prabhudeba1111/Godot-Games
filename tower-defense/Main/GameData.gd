@@ -46,7 +46,7 @@ const towers := {
 			"attack_damage": 150,
 			"attack_speed": 0.5,
 			"attack_range": 10.0,
-			"bulletSpeed": 1500.0,
+			"bulletSpeed": 3500.0,
 		},
 		"upgrades": {
 			"damage": {"amount": 2.5, "multiplies": false},
@@ -54,14 +54,16 @@ const towers := {
 		},
 		"name": "Sniper Turret",
 		"cost": 90,
-		"sprite": "res://Tilesheet/PNG/towerDefense_tile249.png",
+		"sprite": preload("res://Tilesheet/PNG/towerDefense_tile249.png"),
+		"scene": "res://Towers/sniper_body.tscn",
+		"bullet": "res://Towers/Bullets/sniper_bullet.tscn"
 	},
 		"machineGun": {
 		"stats": {
-			"attack_damage": 350,
-			"attack_speed": 1.5,
+			"attack_damage": 35,
+			"attack_speed": 2,
 			"attack_range": 6.0,
-			"bulletSpeed": 800.0,
+			"bulletSpeed": 850.0,
 		},
 		"upgrades": {
 			"damage": {"amount": 2.5, "multiplies": false},
@@ -69,7 +71,9 @@ const towers := {
 		},
 		"name": "Machine Gun Turret",
 		"cost": 70,
-		"sprite": "res://Tilesheet/PNG/towerDefense_tile250.png",
+		"sprite": preload("res://Tilesheet/PNG/towerDefense_tile250.png"),
+		"scene": "res://Towers/machine_gun_body.tscn",
+		"bullet": "res://Towers/Bullets/bullet.tscn"
 	},
 }
 

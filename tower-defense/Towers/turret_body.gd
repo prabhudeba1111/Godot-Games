@@ -1,18 +1,18 @@
 extends TurretBase
 
-@onready var fire_point = $FirePoint
+@onready var bullet_scene :PackedScene
+@onready var fire_points = find_children("", "Marker2D")
 
-@export var bullet_scene :PackedScene= preload("res://Towers/Bullets/sniper_bullet.tscn")
+var enemies_in_range :Array = []
+var curr_fire_point :int = 0
 
-var enemies_in_range = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AttackCD.start()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
@@ -40,6 +40,8 @@ func _on_attack_cd_timeout() -> void:
 
 
 func fire_bullet():
+	var fire_point = fire_points[curr_fire_point]
+	curr_fire_point = (curr_fire_point+1) % fire_points.size()
 	var bullet = bullet_scene.instantiate()
 	bullet.position = fire_point.position
 	bullet.target = get_parent().target
