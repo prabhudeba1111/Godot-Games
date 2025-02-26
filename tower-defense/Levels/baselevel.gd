@@ -6,7 +6,6 @@ var level := "":
 		baseHP = GameData.levels[val]["baseHp"]
 		baseMaxHp = GameData.levels[val]["baseHp"]
 		gold = GameData.levels[val]["startingGold"]
-		$PathSpawner.map_type = val
 
 var gameOver :bool = false
 var baseMaxHp :int = 20

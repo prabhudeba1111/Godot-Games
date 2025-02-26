@@ -1,19 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://7gvq0qdlm80j"]
 
-[ext_resource type="Script" path="res://Towers/Bullets/sniper_bullet.gd" id="1_ama1a"]
+[ext_resource type="Script" path="res://Towers/Bullets/bullet.gd" id="1_ama1a"]
 [ext_resource type="Texture2D" uid="uid://bd17d0rhjyp8a" path="res://Tilesheet/PNG/towerDefense_tile297.png" id="1_su0oc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ce75f"]
-radius = 15.0
+radius = 17.5
 
-[node name="SniperBullet" type="CharacterBody2D"]
+[node name="SniperBullet" type="Area2D"]
 script = ExtResource("1_ama1a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_ce75f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5708
 texture = ExtResource("1_su0oc")
 offset = Vector2(0, -13)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.4, 0.4)
-shape = SubResource("CircleShape2D_ce75f")
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
