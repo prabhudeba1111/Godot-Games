@@ -14,9 +14,16 @@ var gold :int
 
 var occupied_tiles = []
 
+
+func _ready() -> void:
+	$Label.text = "Health : " + str(baseMaxHp)
+
+
 func base_damaged(damage):
 	baseHP -= damage
 	$Label.text = "Health : " + str(baseHP)
+	if baseHP == 0:
+		gameOver == true
 
 func _input(event):
 	if event.is_action_pressed("ui_up"):
