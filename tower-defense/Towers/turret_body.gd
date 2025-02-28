@@ -1,7 +1,7 @@
 extends TurretBase
 
 @onready var bullet_scene :PackedScene
-@onready var fire_points = find_children("", "Marker2D")
+@onready var fire_points :Array = find_children("", "Marker2D")
 
 var enemies_in_range :Array = []
 var curr_fire_point :int = 0
@@ -27,7 +27,7 @@ func _on_range_body_exited(body: Node2D) -> void:
 	update_target()
 
 
-func update_target():
+func update_target() -> void:
 	if enemies_in_range.is_empty():
 		get_parent().target = null
 		return
@@ -39,10 +39,10 @@ func _on_attack_cd_timeout() -> void:
 		fire_bullet()
 
 
-func fire_bullet():
-	var fire_point = fire_points[curr_fire_point]
+func fire_bullet() -> void:
+	var fire_point :Marker2D = fire_points[curr_fire_point]
 	curr_fire_point = (curr_fire_point+1) % fire_points.size()
-	var bullet = bullet_scene.instantiate()
+	var bullet :Area2D = bullet_scene.instantiate()
 	bullet.position = fire_point.position
 	bullet.target = get_parent().target
 	get_node("Projectiles").add_child(bullet)

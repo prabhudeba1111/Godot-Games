@@ -1,6 +1,6 @@
 extends Node2D
 
-var level := "":
+var level :String= "":
 	set(val):
 		level = val
 		baseHP = GameData.levels[val]["baseHp"]
@@ -10,47 +10,51 @@ var level := "":
 var gameOver :bool = false
 var baseMaxHp :int = 20
 var baseHP :int = baseMaxHp
-var gold :int
+var gold :int = 100
 
-var occupied_tiles = []
+var occupied_tiles :Array = []
 
+@onready var level_ui :Control = $LevelUI
 
 func _ready() -> void:
-	$Label.text = "Health : " + str(baseMaxHp)
+	level_ui.updateHealth(baseHP)
+	level_ui.updateMoney(gold)
 
 
-func base_damaged(damage):
+func base_damaged(damage :int) -> void:
+	if gameOver:
+		return
 	baseHP -= damage
-	$Label.text = "Health : " + str(baseHP)
+	$LevelUI.updateHealth(baseHP)
 	if baseHP == 0:
 		gameOver == true
 
-func _input(event):
+func _input(event :InputEvent) -> void:
 	if event.is_action_pressed("ui_up"):
-		var tilemap = get_node("TileMap")
-		var mouse_pos = get_global_mouse_position()
-		var tile_pos = tilemap.local_to_map(mouse_pos)
+		var tilemap :TileMapLayer = get_node("TileMap")
+		var mouse_pos :Vector2 = get_global_mouse_position()
+		var tile_pos :Vector2 = tilemap.local_to_map(mouse_pos)
 		if is_valid_pos(tile_pos):
-			var turretScene := preload("res://Towers/turret_base.tscn")
-			var turret = turretScene.instantiate()
+			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
+			var turret :StaticBody2D = turretScene.instantiate()
 			turret.position = tilemap.map_to_local(tile_pos)
 			turret.turret_type = GameData.towers.keys()[0]
 			get_node("Turrets").add_child(turret)
 			occupied_tiles.append(tile_pos)
 	if event.is_action_pressed("ui_down"):
-		var tilemap = get_node("TileMap")
-		var mouse_pos = get_global_mouse_position()
-		var tile_pos = tilemap.local_to_map(mouse_pos)
+		var tilemap :TileMapLayer = get_node("TileMap")
+		var mouse_pos :Vector2 = get_global_mouse_position()
+		var tile_pos :Vector2 = tilemap.local_to_map(mouse_pos)
 		if is_valid_pos(tile_pos):
-			var turretScene := preload("res://Towers/turret_base.tscn")
-			var turret = turretScene.instantiate()
+			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
+			var turret :StaticBody2D = turretScene.instantiate()
 			turret.position = tilemap.map_to_local(tile_pos)
 			turret.turret_type = GameData.towers.keys()[1]
 			get_node("Turrets").add_child(turret)
 			occupied_tiles.append(tile_pos)
 
 func is_valid_pos(tile_pos: Vector2i) -> bool:
-	var tile_map = get_node("TileMap")
-	var tile_id = tile_map.get_cell_atlas_coords(tile_pos)
-	var invalid_turret_tiles = [Vector2i(1, 4), Vector2i(21, 2), Vector2i(22, 2)]
+	var tile_map :TileMapLayer = get_node("TileMap")
+	var tile_id :Vector2 = tile_map.get_cell_atlas_coords(tile_pos)
+	var invalid_turret_tiles :Array = [Vector2i(1, 4), Vector2i(21, 2), Vector2i(22, 2)]
 	return not tile_id in invalid_turret_tiles and not tile_pos in occupied_tiles

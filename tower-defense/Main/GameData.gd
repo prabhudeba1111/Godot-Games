@@ -1,7 +1,7 @@
 extends Node
 
 
-const enemies := {
+const enemies :Dictionary = {
 	"infantry": {
 		"stats": {
 			"hp": 50.0,
@@ -40,7 +40,7 @@ const enemies := {
 	}
 }
 
-const towers := {
+const towers :Dictionary = {
 	"sniper": {
 		"stats": {
 			"attack_damage": 150,
@@ -77,7 +77,7 @@ const towers := {
 	},
 }
 
-const tower_level := {
+const tower_level :Dictionary = {
 	"1":{
 		"sprite": "res://Tilesheet/PNG/towerDefense_tile183.png"
 	},
@@ -92,7 +92,7 @@ const tower_level := {
 	}
 }
 
-const levels := {
+const levels :Dictionary = {
 	"level1": {
 		"scene": "res://Levels/level1.tscn",
 		"baseHp": 20,

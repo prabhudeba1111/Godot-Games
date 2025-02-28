@@ -1,10 +1,10 @@
 extends PathFollow2D
 
-var enemy_type := "":
+var enemy_type :String = "":
 	set(val):
 		enemy_type = val
 		$Sprite2D.texture = load(GameData.enemies[val]["sprite"])
-		for stat in GameData.enemies[val]["stats"].keys():
+		for stat :String in GameData.enemies[val]["stats"].keys():
 			set(stat, GameData.enemies[val]["stats"][stat])
 
 var speed :int
@@ -23,23 +23,18 @@ func _process(delta: float) -> void:
 	if progress_ratio == 1:
 		finished_path()
 
-func finished_path():
+func finished_path() -> void:
 	get_parent().get_parent().base_damaged(baseDamage)
 	queue_free()
 
-func take_damage(damage):
+func take_damage(damage: int) -> void:
 	hp -= damage
 	damage_animation()
 	if hp <= 0:
 		# give gold
 		queue_free()
 
-func damage_animation():
-	var tween := create_tween()
-	tween.tween_property(self, "v_offset", 0, 0.05)
+func damage_animation() -> void:
+	var tween :Tween = create_tween()
 	tween.tween_property(self, "modulate", Color.ORANGE_RED, 0.1)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.3)
-	tween.set_parallel()
-	tween.tween_property(self, "v_offset", -5, 0.2)
-	tween.set_parallel(false)
-	tween.tween_property(self, "v_offset", 0, 0.2)
