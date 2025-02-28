@@ -24,16 +24,7 @@ var attack_range :float
 var bulletSpeed :int
 
 var level :int = 1
-var target :CharacterBody2D = null
 
-@onready var turret_body :StaticBody2D = $TurretBody
 
 func _ready() -> void:
 	$Base.texture = load(GameData.tower_level[str(level)]["sprite"])
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if target and is_instance_valid(target):
-		var direction :Vector2 = (target.global_position - turret_body.global_position).normalized()
-		var angle :float = direction.angle()
-		turret_body.rotation = lerp_angle(turret_body.rotation, angle, 5 * delta)

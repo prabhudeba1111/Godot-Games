@@ -1,5 +1,7 @@
 extends PathFollow2D
 
+signal dead(value :int)
+
 var enemy_type :String = "":
 	set(val):
 		enemy_type = val
@@ -18,8 +20,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	progress_ratio += 0.0005 * speed * delta
-	#print(progress_ratio)
+	progress += speed * delta
 	if progress_ratio == 1:
 		finished_path()
 
@@ -31,7 +32,7 @@ func take_damage(damage: int) -> void:
 	hp -= damage
 	damage_animation()
 	if hp <= 0:
-		# give gold
+		dead.emit(goldYield)
 		queue_free()
 
 func damage_animation() -> void:

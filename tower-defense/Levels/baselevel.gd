@@ -33,7 +33,7 @@ func _input(event :InputEvent) -> void:
 	if event.is_action_pressed("ui_up"):
 		var tilemap :TileMapLayer = get_node("TileMap")
 		var mouse_pos :Vector2 = get_global_mouse_position()
-		var tile_pos :Vector2 = tilemap.local_to_map(mouse_pos)
+		var tile_pos :Vector2i = tilemap.local_to_map(mouse_pos)
 		if is_valid_pos(tile_pos):
 			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
 			var turret :StaticBody2D = turretScene.instantiate()
@@ -44,7 +44,7 @@ func _input(event :InputEvent) -> void:
 	if event.is_action_pressed("ui_down"):
 		var tilemap :TileMapLayer = get_node("TileMap")
 		var mouse_pos :Vector2 = get_global_mouse_position()
-		var tile_pos :Vector2 = tilemap.local_to_map(mouse_pos)
+		var tile_pos :Vector2i = tilemap.local_to_map(mouse_pos)
 		if is_valid_pos(tile_pos):
 			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
 			var turret :StaticBody2D = turretScene.instantiate()
@@ -53,8 +53,14 @@ func _input(event :InputEvent) -> void:
 			get_node("Turrets").add_child(turret)
 			occupied_tiles.append(tile_pos)
 
+
 func is_valid_pos(tile_pos: Vector2i) -> bool:
 	var tile_map :TileMapLayer = get_node("TileMap")
-	var tile_id :Vector2 = tile_map.get_cell_atlas_coords(tile_pos)
+	var tile_id :Vector2i = tile_map.get_cell_atlas_coords(tile_pos)
 	var invalid_turret_tiles :Array = [Vector2i(1, 4), Vector2i(21, 2), Vector2i(22, 2)]
 	return not tile_id in invalid_turret_tiles and not tile_pos in occupied_tiles
+
+
+func _on_enemy_mover_dead(goldYeild: int) -> void:
+	gold += goldYeild
+	level_ui.updateMoney(gold)

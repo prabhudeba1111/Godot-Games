@@ -39,10 +39,13 @@ expand_mode = 1
 layout_mode = 0
 offset_left = 64.0
 offset_top = 5.0
-offset_right = 129.0
+offset_right = 256.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("2_qu228")
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 35
+text = "20
+"
+vertical_alignment = 1
 
 [node name="MoneyPanel" type="Panel" parent="Stats"]
 self_modulate = Color(1, 1, 1, 0)
@@ -53,10 +56,10 @@ offset_bottom = 128.0
 
 [node name="MoneySymbol" type="TextureRect" parent="Stats/MoneyPanel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = -7.0
-offset_right = 52.0
-offset_bottom = 37.0
+offset_left = 10.0
+offset_top = -8.5
+offset_right = 55.0
+offset_bottom = 36.5
 texture = ExtResource("2_a8heb")
 expand_mode = 1
 
@@ -64,7 +67,10 @@ expand_mode = 1
 layout_mode = 0
 offset_left = 64.0
 offset_top = -11.0
-offset_right = 153.0
+offset_right = 256.0
 offset_bottom = 47.0
 theme_override_fonts/font = ExtResource("2_qu228")
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 35
+text = "100
+"
+vertical_alignment = 1

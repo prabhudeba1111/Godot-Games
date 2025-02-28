@@ -16,7 +16,7 @@ const enemies :Dictionary = {
 			"hp": 105.0,
 			"speed": 80.0,
 			"baseDamage": 1.0,
-			"goldYield": 10.0,
+			"goldYield": 15.0,
 			},
 		"sprite": "res://Tilesheet/PNG/towerDefense_tile246.png",
 	},
@@ -25,7 +25,7 @@ const enemies :Dictionary = {
 			"hp": 250.0,
 			"speed": 150.0,
 			"baseDamage": 1.0,
-			"goldYield": 10.0,
+			"goldYield": 25.0,
 			},
 		"sprite": "res://Tilesheet/PNG/towerDefense_tile247.png",
 	},
@@ -34,7 +34,7 @@ const enemies :Dictionary = {
 			"hp": 150.0,
 			"speed": 90.0,
 			"baseDamage": 2.0,
-			"goldYield": 10.0,
+			"goldYield": 30.0,
 			},
 		"sprite": "res://Tilesheet/PNG/towerDefense_tile248.png",
 	}
@@ -44,7 +44,7 @@ const towers :Dictionary = {
 	"sniper": {
 		"stats": {
 			"attack_damage": 150,
-			"attack_speed": 0.5,
+			"attack_speed": 0.4,
 			"attack_range": 10.0,
 			"bulletSpeed": 3500.0,
 		},
@@ -61,7 +61,7 @@ const towers :Dictionary = {
 		"machineGun": {
 		"stats": {
 			"attack_damage": 35,
-			"attack_speed": 2,
+			"attack_speed": 1,
 			"attack_range": 6.0,
 			"bulletSpeed": 850.0,
 		},
