@@ -3,7 +3,7 @@ extends Area2D
 
 var speed :int
 var target :CharacterBody2D = null
-var turret :StaticBody2D
+var turret :Node2D
 
 func _ready() -> void:
 	turret = get_parent().get_parent().get_parent()

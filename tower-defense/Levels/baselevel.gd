@@ -36,7 +36,7 @@ func _input(event :InputEvent) -> void:
 		var tile_pos :Vector2i = tilemap.local_to_map(mouse_pos)
 		if is_valid_pos(tile_pos):
 			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
-			var turret :StaticBody2D = turretScene.instantiate()
+			var turret :Node2D = turretScene.instantiate()
 			turret.position = tilemap.map_to_local(tile_pos)
 			turret.turret_type = GameData.towers.keys()[0]
 			get_node("Turrets").add_child(turret)
@@ -47,7 +47,7 @@ func _input(event :InputEvent) -> void:
 		var tile_pos :Vector2i = tilemap.local_to_map(mouse_pos)
 		if is_valid_pos(tile_pos):
 			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
-			var turret :StaticBody2D = turretScene.instantiate()
+			var turret :Node2D = turretScene.instantiate()
 			turret.position = tilemap.map_to_local(tile_pos)
 			turret.turret_type = GameData.towers.keys()[1]
 			get_node("Turrets").add_child(turret)

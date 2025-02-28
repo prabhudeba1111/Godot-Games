@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Node2D
 class_name TurretBase
 
 var turret_type :String = "":
@@ -25,6 +25,21 @@ var bulletSpeed :int
 
 var level :int = 1
 
+var deployed := false
+var can_place := false
 
 func _ready() -> void:
 	$Base.texture = load(GameData.tower_level[str(level)]["sprite"])
+
+
+func _process(delta: float) -> void:
+	if not deployed:
+		pass
+
+func draw_range() -> void:
+	draw_circle(Vector2(0,0), attack_range, "3ccd50a9", false, 1, true)
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if deployed and Input.is_action_pressed("Left Click"):
+		draw_range()
