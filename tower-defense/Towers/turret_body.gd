@@ -46,6 +46,7 @@ func _on_attack_cd_timeout() -> void:
 func fire_bullet() -> void:
 	var fire_point :Marker2D = fire_points[curr_fire_point]
 	curr_fire_point = (curr_fire_point+1) % fire_points.size()
+	
 	var bullet :Area2D = bullet_scene.instantiate()
 	bullet.position = fire_point.position
 	bullet.target = target
