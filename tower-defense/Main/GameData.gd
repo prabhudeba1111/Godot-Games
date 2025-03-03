@@ -54,7 +54,7 @@ const towers :Dictionary = {
 		},
 		"name": "Sniper Turret",
 		"cost": 90,
-		"sprite": preload("res://Tilesheet/PNG/towerDefense_tile249.png"),
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile249.png",
 		"scene": "res://Towers/sniper_body.tscn",
 		"bullet": "res://Towers/Bullets/sniper_bullet.tscn"
 	},
@@ -71,7 +71,7 @@ const towers :Dictionary = {
 		},
 		"name": "Machine Gun Turret",
 		"cost": 70,
-		"sprite": preload("res://Tilesheet/PNG/towerDefense_tile250.png"),
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile250.png",
 		"scene": "res://Towers/machine_gun_body.tscn",
 		"bullet": "res://Towers/Bullets/bullet.tscn"
 	},
