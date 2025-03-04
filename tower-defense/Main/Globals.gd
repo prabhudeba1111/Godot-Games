@@ -2,7 +2,7 @@ extends Node
 
 
 var selected_map := ""
-var mainNode : Node2D = preload("res://Main/main.tscn").instantiate()
+var mainNode : Node2D 
 var turretsNode : Node2D
 var projectilesNode : Node2D
 var currentMap : Node2D

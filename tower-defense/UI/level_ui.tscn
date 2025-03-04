@@ -76,7 +76,6 @@ text = "100
 vertical_alignment = 1
 
 [node name="Towers" type="Panel" parent="."]
-self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_left = 1216.0

@@ -94,13 +94,17 @@ const tower_level :Dictionary = {
 
 const levels :Dictionary = {
 	"level1": {
-		"scene": "res://Levels/level1.tscn",
+		"name":"Level 1",
 		"baseHp": 20,
 		"startingGold": 350,
+		"scene": "res://Levels/level_1.tscn",
+		"sprite":"res://Tilesheet/Levels/level_1.png"
 	},
 	"level2": {
-		"scene": "res://Levels/level2.tscn",
+		"name":"Level 2",
 		"baseHp": 20,
 		"startingGold": 400,
+		"scene": "res://Levels/level_2.tscn",
+		"sprite":"res://Tilesheet/Levels/level_2.png"
 	}
 }

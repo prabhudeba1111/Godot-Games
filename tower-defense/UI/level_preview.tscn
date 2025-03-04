@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://tknag4hvyog2"]
+
+[ext_resource type="FontFile" uid="uid://b04lxs7mhgy4k" path="res://Tilesheet/Font/BlackOpsOne-Regular.ttf" id="1_g43di"]
+[ext_resource type="Texture2D" uid="uid://bcsw3ukl0274w" path="res://Tilesheet/Levels/level_1.png" id="2_2mt76"]
+
+[node name="LevelPreview" type="Panel"]
+custom_minimum_size = Vector2(384, 64)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -896.0
+offset_bottom = -656.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelName" type="Label" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_g43di")
+theme_override_font_sizes/font_size = 36
+text = "Level 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LevelPicture" type="TextureRect" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 1.0
+grow_vertical = 2
+texture = ExtResource("2_2mt76")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true

@@ -19,7 +19,6 @@ var occupied_tiles :Array = []
 func _ready() -> void:
 	Globals.currentMap = self
 	Globals.selected_map = "level1"
-	print(Globals.selected_map)
 	level_ui.updateHealth(baseHP)
 	level_ui.updateMoney(gold)
 
@@ -31,8 +30,8 @@ func base_damaged(damage :int) -> void:
 	$LevelUI.updateHealth(baseHP)
 	if baseHP <= 0:
 		gameOver = true
-		var gameOverPanelScene := preload("res://UI/game_over_ui.tscn")
-		var gameOverPanel := gameOverPanelScene.instantiate()
+		var gameOverPanelScene :PackedScene = preload("res://UI/game_over_ui.tscn")
+		var gameOverPanel :CanvasLayer = gameOverPanelScene.instantiate()
 		$LevelUI.add_child(gameOverPanel)
 
 func _input(event :InputEvent) -> void:
