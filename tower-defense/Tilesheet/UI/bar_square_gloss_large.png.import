@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn4oxvnmb2h87"
-path="res://.godot/imported/heart-4219.svg-2ef45b7904dd3f93bc4dec7d0a1c9e96.ctex"
+uid="uid://consv5l466j48"
+path="res://.godot/imported/bar_square_gloss_large.png-67e4c0e5bdc2d9663e1b7b299db8eb90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tilesheet/heart-4219.svg"
-dest_files=["res://.godot/imported/heart-4219.svg-2ef45b7904dd3f93bc4dec7d0a1c9e96.ctex"]
+source_file="res://Tilesheet/UI/bar_square_gloss_large.png"
+dest_files=["res://.godot/imported/bar_square_gloss_large.png-67e4c0e5bdc2d9663e1b7b299db8eb90.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

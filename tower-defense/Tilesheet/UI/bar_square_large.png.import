@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wrwy7rapji13"
-path="res://.godot/imported/iconmonstr-heart-thin.svg-2152a67b8de0e15281e1c1b1054dadef.ctex"
+uid="uid://bri3mng5kltre"
+path="res://.godot/imported/bar_square_large.png-5c56798e2a4cf9f778e7232115795b79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tilesheet/iconmonstr-heart-thin.svg"
-dest_files=["res://.godot/imported/iconmonstr-heart-thin.svg-2152a67b8de0e15281e1c1b1054dadef.ctex"]
+source_file="res://Tilesheet/UI/bar_square_large.png"
+dest_files=["res://.godot/imported/bar_square_large.png-5c56798e2a4cf9f778e7232115795b79.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=100.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

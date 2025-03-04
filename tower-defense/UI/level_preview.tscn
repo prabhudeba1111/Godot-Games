@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://tknag4hvyog2"]
+[gd_scene load_steps=5 format=3 uid="uid://tknag4hvyog2"]
 
 [ext_resource type="FontFile" uid="uid://b04lxs7mhgy4k" path="res://Tilesheet/Font/BlackOpsOne-Regular.ttf" id="1_g43di"]
+[ext_resource type="Texture2D" uid="uid://consv5l466j48" path="res://Tilesheet/UI/bar_square_gloss_large.png" id="1_wat2x"]
 [ext_resource type="Texture2D" uid="uid://bcsw3ukl0274w" path="res://Tilesheet/Levels/level_1.png" id="2_2mt76"]
+[ext_resource type="Texture2D" uid="uid://bri3mng5kltre" path="res://Tilesheet/UI/bar_square_large.png" id="2_tybp5"]
 
 [node name="LevelPreview" type="Panel"]
 custom_minimum_size = Vector2(384, 64)
@@ -20,6 +22,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture_normal = ExtResource("1_wat2x")
+texture_pressed = ExtResource("2_tybp5")
+stretch_mode = 0
 
 [node name="LevelName" type="Label" parent="TextureButton"]
 layout_mode = 1
@@ -39,8 +44,10 @@ metadata/_edit_use_anchors_ = true
 [node name="LevelPicture" type="TextureRect" parent="TextureButton"]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.0234375
+anchor_top = 0.09375
 anchor_right = 0.25
-anchor_bottom = 1.0
+anchor_bottom = 0.90625
 grow_vertical = 2
 texture = ExtResource("2_2mt76")
 expand_mode = 1

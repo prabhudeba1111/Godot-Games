@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cijvxyl5m8shn"]
+[gd_scene load_steps=5 format=3 uid="uid://cijvxyl5m8shn"]
 
 [ext_resource type="Script" path="res://UI/main_menu.gd" id="1_p46eu"]
+[ext_resource type="Texture2D" uid="uid://consv5l466j48" path="res://Tilesheet/UI/bar_square_gloss_large.png" id="2_urk33"]
+[ext_resource type="Texture2D" uid="uid://bri3mng5kltre" path="res://Tilesheet/UI/bar_square_large.png" id="3_v6nsb"]
+[ext_resource type="FontFile" uid="uid://b04lxs7mhgy4k" path="res://Tilesheet/Font/BlackOpsOne-Regular.ttf" id="4_2c0rq"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,6 +13,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p46eu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(5.79976e-06, 0.592224, 0.207294, 1)
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -28,20 +40,66 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 32
 
-[node name="NewGameButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="NewGameButton" type="TextureButton" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
+texture_normal = ExtResource("2_urk33")
+texture_pressed = ExtResource("3_v6nsb")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/NewGameButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_2c0rq")
+theme_override_font_sizes/font_size = 40
 text = "New Game"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="SettingsButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="SettingsButton" type="TextureButton" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
-text = "Settings"
+texture_normal = ExtResource("2_urk33")
+texture_pressed = ExtResource("3_v6nsb")
+stretch_mode = 0
 
-[node name="QuitGameButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/SettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_2c0rq")
+theme_override_font_sizes/font_size = 40
+text = "Settings
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitGameButton" type="TextureButton" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
+texture_normal = ExtResource("2_urk33")
+texture_pressed = ExtResource("3_v6nsb")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/QuitGameButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_2c0rq")
+theme_override_font_sizes/font_size = 40
 text = "Quit Game"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Panel/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
