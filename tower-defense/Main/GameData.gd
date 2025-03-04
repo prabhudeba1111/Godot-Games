@@ -1,7 +1,7 @@
 extends Node
 
 
-const enemies := {
+const enemies :Dictionary = {
 	"infantry": {
 		"stats": {
 			"hp": 50.0,
@@ -16,7 +16,7 @@ const enemies := {
 			"hp": 105.0,
 			"speed": 80.0,
 			"baseDamage": 1.0,
-			"goldYield": 10.0,
+			"goldYield": 15.0,
 			},
 		"sprite": "res://Tilesheet/PNG/towerDefense_tile246.png",
 	},
@@ -25,7 +25,7 @@ const enemies := {
 			"hp": 250.0,
 			"speed": 150.0,
 			"baseDamage": 1.0,
-			"goldYield": 10.0,
+			"goldYield": 25.0,
 			},
 		"sprite": "res://Tilesheet/PNG/towerDefense_tile247.png",
 	},
@@ -34,17 +34,17 @@ const enemies := {
 			"hp": 150.0,
 			"speed": 90.0,
 			"baseDamage": 2.0,
-			"goldYield": 10.0,
+			"goldYield": 30.0,
 			},
 		"sprite": "res://Tilesheet/PNG/towerDefense_tile248.png",
 	}
 }
 
-const towers := {
+const towers :Dictionary = {
 	"sniper": {
 		"stats": {
 			"attack_damage": 150,
-			"attack_speed": 0.5,
+			"attack_speed": 0.4,
 			"attack_range": 10.0,
 			"bulletSpeed": 3500.0,
 		},
@@ -54,14 +54,14 @@ const towers := {
 		},
 		"name": "Sniper Turret",
 		"cost": 90,
-		"sprite": preload("res://Tilesheet/PNG/towerDefense_tile249.png"),
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile249.png",
 		"scene": "res://Towers/sniper_body.tscn",
 		"bullet": "res://Towers/Bullets/sniper_bullet.tscn"
 	},
-		"machineGun": {
+	"machineGun": {
 		"stats": {
 			"attack_damage": 35,
-			"attack_speed": 2,
+			"attack_speed": 1,
 			"attack_range": 6.0,
 			"bulletSpeed": 850.0,
 		},
@@ -71,13 +71,13 @@ const towers := {
 		},
 		"name": "Machine Gun Turret",
 		"cost": 70,
-		"sprite": preload("res://Tilesheet/PNG/towerDefense_tile250.png"),
+		"sprite": "res://Tilesheet/PNG/towerDefense_tile250.png",
 		"scene": "res://Towers/machine_gun_body.tscn",
 		"bullet": "res://Towers/Bullets/bullet.tscn"
 	},
 }
 
-const tower_level := {
+const tower_level :Dictionary = {
 	"1":{
 		"sprite": "res://Tilesheet/PNG/towerDefense_tile183.png"
 	},
@@ -92,15 +92,19 @@ const tower_level := {
 	}
 }
 
-const levels := {
+const levels :Dictionary = {
 	"level1": {
-		"scene": "res://Levels/level1.tscn",
+		"name":"Level 1",
 		"baseHp": 20,
 		"startingGold": 350,
+		"scene": "res://Levels/level_1.tscn",
+		"sprite":"res://Tilesheet/Levels/level_1.png"
 	},
 	"level2": {
-		"scene": "res://Levels/level2.tscn",
+		"name":"Level 2",
 		"baseHp": 20,
 		"startingGold": 400,
+		"scene": "res://Levels/level_2.tscn",
+		"sprite":"res://Tilesheet/Levels/level_2.png"
 	}
 }

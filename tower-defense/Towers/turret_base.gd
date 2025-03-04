@@ -1,18 +1,18 @@
-extends StaticBody2D
+extends Node2D
 class_name TurretBase
 
-var turret_type := "":
+var turret_type :String = "":
 	set(value):
 		turret_type = value
-		var bodyscene = load(GameData.towers[value]["scene"])
-		var Body = bodyscene.instantiate()
+		var bodyscene :PackedScene = load(GameData.towers[value]["scene"])
+		var Body :StaticBody2D= bodyscene.instantiate()
 		add_child(Body)
 		Body.bullet_scene = load(GameData.towers[value]["bullet"])
 		Body.set_script(load("res://Towers/turret_body.gd"))
-		for stat in GameData.towers[value]["stats"].keys():
+		for stat :String in GameData.towers[value]["stats"].keys():
 			set(stat, GameData.towers[value]["stats"][stat])
 		
-		var new_shape = CircleShape2D.new()
+		var new_shape :CircleShape2D = CircleShape2D.new()
 		new_shape.radius = attack_range
 		$TurretBody/Range/CollisionShape2D.shape = new_shape
 		$TurretBody/AttackCD.wait_time = 1 / attack_speed
@@ -24,16 +24,22 @@ var attack_range :float
 var bulletSpeed :int
 
 var level :int = 1
-var target :CharacterBody2D = null
 
-@onready var turret_body = $TurretBody
+var deployed := false
+var can_place := false
 
 func _ready() -> void:
 	$Base.texture = load(GameData.tower_level[str(level)]["sprite"])
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
-	if target and is_instance_valid(target):
-		var direction = (target.global_position - turret_body.global_position).normalized()
-		var angle = direction.angle()
-		turret_body.rotation = lerp_angle(turret_body.rotation, angle, 5 * delta)
+	if not deployed:
+		pass
+
+func draw_range() -> void:
+	draw_circle(Vector2(0,0), attack_range, "3ccd50a9", false, 1, true)
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if deployed and Input.is_action_pressed("Left Click"):
+		draw_range()
