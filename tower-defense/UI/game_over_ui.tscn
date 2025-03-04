@@ -2,22 +2,12 @@
 
 [ext_resource type="Script" path="res://UI/game_over_ui.gd" id="1_lwbxc"]
 
-[node name="GameOverUI" type="Control"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1280.0
-offset_bottom = -720.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="GameOverUI" type="CanvasLayer"]
 script = ExtResource("1_lwbxc")
 
 [node name="CenterPanel" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(200, 200)
-layout_mode = 0
 offset_left = 512.0
 offset_top = 256.0
 offset_right = 768.0

@@ -58,7 +58,7 @@ const towers :Dictionary = {
 		"scene": "res://Towers/sniper_body.tscn",
 		"bullet": "res://Towers/Bullets/sniper_bullet.tscn"
 	},
-		"machineGun": {
+	"machineGun": {
 		"stats": {
 			"attack_damage": 35,
 			"attack_speed": 1,

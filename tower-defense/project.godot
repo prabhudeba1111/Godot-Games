@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameData="*res://Main/GameData.gd"
+Globals="*res://Main/Globals.gd"
 
 [debug]
 

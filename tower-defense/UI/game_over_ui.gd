@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,7 +16,8 @@ func ui_animation() -> void:
 
 
 func _on_retry_button_pressed() -> void:
-	pass
+	Globals.restart_current_level()
+	queue_free()
 
 
 func _on_main_menu_button_pressed() -> void:

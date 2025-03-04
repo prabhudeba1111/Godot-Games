@@ -3,7 +3,6 @@ extends Control
 @onready var tower_selection  = $Towers/TowerContainer
 @onready var health_label :Label = $Stats/HealthPanel/HealthLabel
 @onready var money_label :Label = $Stats/MoneyPanel/MoneyLabel
-#@onready var tower_preview :Sprite2D = $Towers/TowerPreview
 
 var selected_tower = null
 
@@ -30,9 +29,11 @@ func populate_tower_buttons() -> void:
 
 func select_tower(tower_name):
 	selected_tower = tower_name
-	print(tower_name)
-	tower_preview.texture = load(GameData.towers[tower_name]["sprite"])
-
+	var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
+	var turret :Node2D = turretScene.instantiate()
+	turret.position = get_global_mouse_position() - Vector2(1000, 0)
+	turret.turret_type = tower_name
+	add_child(turret)
 
 func updateHealth(value: int) -> void:
 	health_label.text = str(value)
