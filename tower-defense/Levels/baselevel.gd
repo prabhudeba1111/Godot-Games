@@ -17,8 +17,8 @@ var occupied_tiles :Array = []
 @onready var level_ui :Control = $LevelUI
 
 func _ready() -> void:
+	level = Globals.selected_map
 	Globals.currentMap = self
-	Globals.selected_map = "level1"
 	level_ui.updateHealth(baseHP)
 	level_ui.updateMoney(gold)
 

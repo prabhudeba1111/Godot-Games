@@ -10,9 +10,8 @@ var hud : Control
 
 func restart_current_level():
 	var currentLevelScene := load(currentMap.scene_file_path)
-	currentMap.queue_free()
-	var newMap = currentLevelScene.instantiate()
-	print(selected_map)
-	newMap.level = selected_map
-	mainNode.add_child(newMap)
+	get_tree().change_scene_to_packed(currentLevelScene)
+	#currentMap.queue_free()
+	#var newMap = currentLevelScene.instantiate()
+	#mainNode.add_child(newMap)
 	#hud.reset()
