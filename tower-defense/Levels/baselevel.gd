@@ -27,6 +27,7 @@ func base_damaged(damage :int) -> void:
 	if gameOver:
 		return
 	baseHP -= damage
+	baseHP = max(baseHP, 0)
 	$LevelUI.updateHealth(baseHP)
 	if baseHP <= 0:
 		gameOver = true
