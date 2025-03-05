@@ -19,8 +19,9 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func hit_target() -> void:
-	var damage :int = turret.attack_damage
-	target.get_parent().take_damage(damage)
+	if is_instance_valid(target):
+		var damage :int = turret.attack_damage
+		target.get_parent().take_damage(damage)
 	queue_free()
 
 

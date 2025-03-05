@@ -30,5 +30,4 @@ func populate_levels():
 
 func select_level(level):
 	Globals.selected_map = level
-	print(GameData.levels[level]["scene"])
 	get_tree().change_scene_to_file(GameData.levels[level]["scene"])
