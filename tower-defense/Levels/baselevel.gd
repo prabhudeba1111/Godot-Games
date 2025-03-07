@@ -8,19 +8,21 @@ var level :String= "":
 		gold = GameData.levels[val]["startingGold"]
 
 var gameOver :bool = false
-var baseMaxHp :int = 20
-var baseHP :int = baseMaxHp
-var gold :int = 100
+var baseMaxHp :int 
+var baseHP :int
+var gold :int :
+	set(value):
+		gold = value
+		Globals.goldChanged.emit(value)
 
 var occupied_tiles :Array = []
 
-@onready var level_ui :Control = $LevelUI
 
 func _ready() -> void:
-	level = Globals.selected_map
 	Globals.currentMap = self
-	level_ui.updateHealth(baseHP)
-	level_ui.updateMoney(gold)
+	Globals.turretsNode = $Turrets
+	Globals.baseHpChanged.emit(baseHP)
+	Globals.goldChanged.emit(gold)
 
 
 func base_damaged(damage :int) -> void:
@@ -28,12 +30,12 @@ func base_damaged(damage :int) -> void:
 		return
 	baseHP -= damage
 	baseHP = max(baseHP, 0)
-	$LevelUI.updateHealth(baseHP)
+	Globals.baseHpChanged.emit(baseHP)
 	if baseHP <= 0:
 		gameOver = true
 		var gameOverPanelScene :PackedScene = preload("res://UI/game_over_ui.tscn")
 		var gameOverPanel :CanvasLayer = gameOverPanelScene.instantiate()
-		$LevelUI.add_child(gameOverPanel)
+		Globals.hud.add_child(gameOverPanel)
 
 func _input(event :InputEvent) -> void:
 	if event.is_action_pressed("ui_up"):
@@ -69,4 +71,4 @@ func is_valid_pos(tile_pos: Vector2i) -> bool:
 
 func _on_enemy_mover_dead(goldYeild: int) -> void:
 	gold += goldYeild
-	level_ui.updateMoney(gold)
+	Globals.goldChanged.emit(gold)

@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://cqwu2hynngei7"]
+[gd_scene load_steps=5 format=4 uid="uid://cqwu2hynngei7"]
 
 [ext_resource type="Script" path="res://Levels/baselevel.gd" id="1_glosh"]
 [ext_resource type="PackedScene" uid="uid://4dvp5urxnon2" path="res://Tilesheet/Tiles/tile_map.tscn" id="1_q1rg7"]
 [ext_resource type="Script" path="res://Enemies/enemy_spawner.gd" id="2_bisev"]
-[ext_resource type="PackedScene" uid="uid://dkwb0l4v1h5n" path="res://UI/level_ui.tscn" id="4_0n58h"]
 
 [sub_resource type="Curve2D" id="Curve2D_kgdmk"]
 _data = {
@@ -27,7 +26,5 @@ wait_time = 0.7
 autostart = true
 
 [node name="Turrets" type="Node2D" parent="."]
-
-[node name="LevelUI" parent="." instance=ExtResource("4_0n58h")]
 
 [connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]

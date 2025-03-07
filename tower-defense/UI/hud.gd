@@ -1,13 +1,14 @@
 extends Control
 
 @onready var tower_selection  = $Towers/TowerContainer
-@onready var health_label :Label = $Stats/HealthPanel/HealthLabel
-@onready var money_label :Label = $Stats/MoneyPanel/MoneyLabel
 
 
 var button_scene = preload("res://UI/tower_preview.tscn")
 
 func _ready() -> void:
+	Globals.hud = self
+	Globals.baseHpChanged.connect(updateHealth)
+	Globals.goldChanged.connect(updateMoney)
 	populate_tower_buttons()
 
 
@@ -29,11 +30,17 @@ func select_tower(tower):
 	var turret :Node2D = turretScene.instantiate()
 	turret.position = get_global_mouse_position() - Vector2(1000, 0)
 	turret.turret_type = tower
-	add_child(turret)
+	Globals.turretsNode.add_child(turret)
+
+
+func set_tower_preview(tower, mouse_pos):
+	var tower_preview = load(GameData.towers[tower]["sprite"]).instantiate()
+	
+
 
 func updateHealth(value: int) -> void:
-	health_label.text = str(value)
+	%HealthLabel.text = str(value)
 
 
 func updateMoney(value: int) -> void:
-	money_label.text = str(value)
+	%MoneyLabel.text = str(value)

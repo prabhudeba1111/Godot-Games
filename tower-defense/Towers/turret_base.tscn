@@ -15,7 +15,6 @@ scale = Vector2(3.2, 3.2)
 shape = SubResource("RectangleShape2D_aukfy")
 
 [node name="Base" type="Sprite2D" parent="."]
+position = Vector2(0.400002, 0.400002)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_juuth")
-
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
