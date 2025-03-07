@@ -21,6 +21,7 @@ var occupied_tiles :Array = []
 func _ready() -> void:
 	Globals.currentMap = self
 	Globals.turretsNode = $Turrets
+	Globals.tileMapNode = $TileMap
 	Globals.baseHpChanged.emit(baseHP)
 	Globals.goldChanged.emit(gold)
 

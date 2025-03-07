@@ -45,7 +45,7 @@ const towers :Dictionary = {
 		"stats": {
 			"attack_damage": 150,
 			"attack_speed": 0.4,
-			"attack_range": 10.0,
+			"attack_range": 350.0,
 			"bulletSpeed": 3500.0,
 		},
 		"upgrades": {
@@ -62,7 +62,7 @@ const towers :Dictionary = {
 		"stats": {
 			"attack_damage": 35,
 			"attack_speed": 1,
-			"attack_range": 6.0,
+			"attack_range": 200.0,
 			"bulletSpeed": 850.0,
 		},
 		"upgrades": {

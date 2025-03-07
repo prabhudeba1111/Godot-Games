@@ -1,14 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://7tye1qgvgvxi"]
+[gd_scene load_steps=3 format=3 uid="uid://7tye1qgvgvxi"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_7nfui"]
-[ext_resource type="PackedScene" uid="uid://4dvp5urxnon2" path="res://Tilesheet/Tiles/tile_map.tscn" id="1_mwqfc"]
-[ext_resource type="PackedScene" uid="uid://dkwb0l4v1h5n" path="res://UI/hud.tscn" id="3_p0txe"]
+[ext_resource type="PackedScene" uid="uid://dscgmixmialjs" path="res://UI/hud.tscn" id="3_deq6w"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7nfui")
 
-[node name="TileMap" parent="." instance=ExtResource("1_mwqfc")]
-
 [node name="LevelUI" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="LevelUI" instance=ExtResource("3_p0txe")]
+[node name="HUD" parent="LevelUI" instance=ExtResource("3_deq6w")]

@@ -6,10 +6,11 @@ signal goldChanged(newGold)
 signal baseHpChanged(newHp)
 
 
-var selected_map := ""
+var selected_map :String = ""
 var mainNode : Node2D 
 var turretsNode : Node2D
 var currentMap : Node2D
+var tileMapNode : TileMapLayer
 var hud : Control
 
 func restart_current_level():

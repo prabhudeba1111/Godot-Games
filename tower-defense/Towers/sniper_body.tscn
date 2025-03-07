@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://byswovvceeejr" path="res://Tilesheet/PNG/towerDefense_tile249.png" id="2_74u2r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_praf1"]
+radius = 50.55
 
 [node name="TurretBody" type="StaticBody2D"]
 script = ExtResource("1_k8blp")
@@ -11,7 +12,6 @@ script = ExtResource("1_k8blp")
 [node name="Range" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
-scale = Vector2(35, 35)
 shape = SubResource("CircleShape2D_praf1")
 
 [node name="Body" type="Sprite2D" parent="."]

@@ -1,9 +1,16 @@
 extends Control
 
-@onready var tower_selection  = $Towers/TowerContainer
+#@onready var tile_map :TileMapLayer = Globals.tileMapNode
+@onready var tile_map :TileMapLayer = $TileMap
 
 
-var button_scene = preload("res://UI/tower_preview.tscn")
+var button_scene = preload("res://UI/tower_button.tscn")
+var curr_preview: Sprite2D = null
+var curr_range: Node2D = null
+var curr_tower_type: String = ""
+var build_mode: bool = false
+var can_build: bool = false
+var occupied_tiles: Array[Vector2i] = []
 
 func _ready() -> void:
 	Globals.hud = self
@@ -12,8 +19,39 @@ func _ready() -> void:
 	populate_tower_buttons()
 
 
+func _process(delta: float) -> void:
+	if build_mode and curr_preview:
+		var mouse_pos = get_global_mouse_position()
+		var tile_pos = tile_map.local_to_map(mouse_pos)
+		var world_pos = tile_map.map_to_local(tile_pos)
+		
+		curr_preview.global_position = world_pos
+		curr_range.global_position = world_pos
+		
+		if tile_pos in occupied_tiles:
+			can_build = false
+			curr_preview.modulate = Color(1, 0, 0, 0.5)
+		else:
+			can_build = true
+			curr_preview.modulate = Color(1, 1, 1, 0.5)
+
+func _input(event: InputEvent) -> void:
+	if build_mode and curr_preview:
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				var mouse_pos = get_global_mouse_position()
+				var tile_pos = tile_map.local_to_map(mouse_pos)
+				
+				if can_build:
+					#place_tower(curr_tower_type, tile_map.map_to_local(tile_pos)
+					occupied_tiles.append(tile_pos)
+					cancel_build_mode()
+			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				cancel_build_mode()
+
+
 func populate_tower_buttons() -> void:
-	for child in tower_selection.get_children():
+	for child in %TowerContainer.get_children():
 		child.queue_free()
 		
 	for tower in GameData.towers.keys():
@@ -21,23 +59,55 @@ func populate_tower_buttons() -> void:
 		
 		button.get_node("TextureButton").texture_normal = load(GameData.towers[tower]["sprite"])
 		button.get_node("Cost").text = str(GameData.towers[tower]["cost"])
-		button.get_node("TextureButton").pressed.connect(func(): select_tower(tower))
-		tower_selection.add_child(button)
+		button.get_node("TextureButton").pressed.connect(func(): set_tower_preview(tower))
+		%TowerContainer.add_child(button)
 
 
-func select_tower(tower):
-	var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
-	var turret :Node2D = turretScene.instantiate()
-	turret.position = get_global_mouse_position() - Vector2(1000, 0)
-	turret.turret_type = tower
-	Globals.turretsNode.add_child(turret)
-
-
-func set_tower_preview(tower, mouse_pos):
-	var tower_preview = load(GameData.towers[tower]["sprite"]).instantiate()
+func set_tower_preview(tower):
+	if curr_preview:
+		cancel_build_mode()
 	
+	build_mode = true
+	curr_tower_type = tower
+	curr_preview = Sprite2D.new()
+	curr_preview.texture = load(GameData.towers[tower]["sprite"])
+	add_child(curr_preview)
+	
+	curr_range = draw_range(GameData.towers[curr_tower_type]["stats"]["attack_range"])
+	add_child(curr_range)	
+	
+	set_process(true)
 
 
+func draw_range(range: float):
+	var indicator = Line2D.new()
+	indicator.width = 2.0 
+	indicator.default_color = Color(1, 1, 1, 0.8)
+	
+	var points: Array[Vector2] = []
+	var step = 20
+	for i in range(step + 1):
+		var angle = 2 * PI * i / step
+		var point = Vector2(cos(angle), sin(angle)) * range
+		points.append(point)
+	indicator.points = points
+	return indicator
+
+
+func cancel_build_mode() -> void:
+	if curr_preview:
+		curr_preview.queue_free()
+		curr_preview = null
+	if curr_range:
+		curr_range.queue_free()
+		curr_range = null
+	build_mode = false
+	can_build = false
+	curr_tower_type = ""
+	
+	set_process(false)
+	
+	
 func updateHealth(value: int) -> void:
 	%HealthLabel.text = str(value)
 
