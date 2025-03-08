@@ -20,10 +20,3 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-func initiate_build_mode(tower):
-	build_type = tower
-	build_mode = true
-	get_node("LevelUI").get_node("HUD").set_tower_preview(build_type, get_global_mouse_position())
-	

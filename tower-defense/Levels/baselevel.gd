@@ -15,8 +15,6 @@ var gold :int :
 		gold = value
 		Globals.goldChanged.emit(value)
 
-var occupied_tiles :Array = []
-
 
 func _ready() -> void:
 	Globals.currentMap = self
@@ -24,6 +22,7 @@ func _ready() -> void:
 	Globals.tileMapNode = $TileMap
 	Globals.baseHpChanged.emit(baseHP)
 	Globals.goldChanged.emit(gold)
+	get_node("/root/Main/LevelUI/HUD").tile_map = $TileMap
 
 
 func base_damaged(damage :int) -> void:
@@ -37,37 +36,6 @@ func base_damaged(damage :int) -> void:
 		var gameOverPanelScene :PackedScene = preload("res://UI/game_over_ui.tscn")
 		var gameOverPanel :CanvasLayer = gameOverPanelScene.instantiate()
 		Globals.hud.add_child(gameOverPanel)
-
-func _input(event :InputEvent) -> void:
-	if event.is_action_pressed("ui_up"):
-		var tilemap :TileMapLayer = get_node("TileMap")
-		var mouse_pos :Vector2 = get_global_mouse_position()
-		var tile_pos :Vector2i = tilemap.local_to_map(mouse_pos)
-		if is_valid_pos(tile_pos):
-			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
-			var turret :Node2D = turretScene.instantiate()
-			turret.position = tilemap.map_to_local(tile_pos)
-			turret.turret_type = GameData.towers.keys()[0]
-			get_node("Turrets").add_child(turret)
-			occupied_tiles.append(tile_pos)
-	if event.is_action_pressed("ui_down"):
-		var tilemap :TileMapLayer = get_node("TileMap")
-		var mouse_pos :Vector2 = get_global_mouse_position()
-		var tile_pos :Vector2i = tilemap.local_to_map(mouse_pos)
-		if is_valid_pos(tile_pos):
-			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
-			var turret :Node2D = turretScene.instantiate()
-			turret.position = tilemap.map_to_local(tile_pos)
-			turret.turret_type = GameData.towers.keys()[1]
-			get_node("Turrets").add_child(turret)
-			occupied_tiles.append(tile_pos)
-
-
-func is_valid_pos(tile_pos: Vector2i) -> bool:
-	var tile_map :TileMapLayer = get_node("TileMap")
-	var tile_id :Vector2i = tile_map.get_cell_atlas_coords(tile_pos)
-	var invalid_turret_tiles :Array = [Vector2i(1, 4), Vector2i(21, 2), Vector2i(22, 2)]
-	return not tile_id in invalid_turret_tiles and not tile_pos in occupied_tiles
 
 
 func _on_enemy_mover_dead(goldYeild: int) -> void:

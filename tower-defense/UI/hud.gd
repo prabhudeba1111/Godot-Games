@@ -1,13 +1,13 @@
 extends Control
 
-#@onready var tile_map :TileMapLayer = Globals.tileMapNode
-@onready var tile_map :TileMapLayer = $TileMap
+@onready var tile_map :TileMapLayer
 
 
 var button_scene = preload("res://UI/tower_button.tscn")
 var curr_preview: Sprite2D = null
 var curr_range: Node2D = null
 var curr_tower_type: String = ""
+var tower_cost: int 
 var build_mode: bool = false
 var can_build: bool = false
 var occupied_tiles: Array[Vector2i] = []
@@ -28,12 +28,12 @@ func _process(delta: float) -> void:
 		curr_preview.global_position = world_pos
 		curr_range.global_position = world_pos
 		
-		if tile_pos in occupied_tiles:
-			can_build = false
-			curr_preview.modulate = Color(1, 0, 0, 0.5)
-		else:
+		if is_valid_pos(tile_pos) and Globals.currentMap.gold >= tower_cost:
 			can_build = true
 			curr_preview.modulate = Color(1, 1, 1, 0.5)
+		else:
+			can_build = false
+			curr_preview.modulate = Color(1, 0, 0, 0.5)
 
 func _input(event: InputEvent) -> void:
 	if build_mode and curr_preview:
@@ -43,17 +43,23 @@ func _input(event: InputEvent) -> void:
 				var tile_pos = tile_map.local_to_map(mouse_pos)
 				
 				if can_build:
-					#place_tower(curr_tower_type, tile_map.map_to_local(tile_pos)
+					Globals.currentMap.gold -= tower_cost
+					place_tower(tile_map.map_to_local(tile_pos))
 					occupied_tiles.append(tile_pos)
 					cancel_build_mode()
 			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 				cancel_build_mode()
 
+func place_tower(turret_pos):
+	var turret_instance = load("res://Towers/turret_base.tscn").instantiate()
+	turret_instance.turret_type = curr_tower_type
+	turret_instance.global_position = turret_pos
+	get_parent().add_child(turret_instance)
 
 func populate_tower_buttons() -> void:
 	for child in %TowerContainer.get_children():
 		child.queue_free()
-		
+	
 	for tower in GameData.towers.keys():
 		var button = button_scene.instantiate()
 		
@@ -63,11 +69,18 @@ func populate_tower_buttons() -> void:
 		%TowerContainer.add_child(button)
 
 
+func is_valid_pos(tile_pos: Vector2i) -> bool:
+	var tile_id :Vector2i = tile_map.get_cell_atlas_coords(tile_pos)
+	var invalid_turret_tiles :Array = [Vector2i(1, 4), Vector2i(21, 2), Vector2i(22, 2)]
+	return not tile_id in invalid_turret_tiles and not tile_pos in occupied_tiles
+
+
 func set_tower_preview(tower):
 	if curr_preview:
 		cancel_build_mode()
 	
 	build_mode = true
+	tower_cost = GameData.towers[tower]["cost"]
 	curr_tower_type = tower
 	curr_preview = Sprite2D.new()
 	curr_preview.texture = load(GameData.towers[tower]["sprite"])

@@ -9,7 +9,6 @@ func _ready() -> void:
 	turret = get_parent().get_parent().get_parent()
 	speed = turret.bulletSpeed
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if target and is_instance_valid(target):
 		var direction :Vector2 = (target.global_position - global_position).normalized()

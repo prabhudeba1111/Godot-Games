@@ -28,8 +28,8 @@ var level :int = 1
 var deployed := false
 var can_place := false
 
-#func _ready() -> void:
-	#$Base.texture = load(GameData.tower_level[str(level)]["sprite"])
+func _ready() -> void:
+	$Base.texture = load(GameData.tower_level[str(level)]["sprite"])
 
 
 func _process(delta: float) -> void:
