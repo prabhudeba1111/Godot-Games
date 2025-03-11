@@ -4,8 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dscgmixmialjs" path="res://UI/hud.tscn" id="3_deq6w"]
 
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_7nfui")
 
 [node name="LevelUI" type="CanvasLayer" parent="."]
+process_mode = 1
 
 [node name="HUD" parent="LevelUI" instance=ExtResource("3_deq6w")]

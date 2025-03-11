@@ -11,6 +11,7 @@ _data = {
 point_count = 8
 
 [node name="Level1" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_aid57")
 
 [node name="TileMap" parent="." instance=ExtResource("1_j3dr8")]

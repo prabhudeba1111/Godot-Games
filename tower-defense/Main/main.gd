@@ -17,6 +17,17 @@ func _ready() -> void:
 	level.level = Globals.selected_map
 	add_child(level)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		toggle_pause()
+
+
+func toggle_pause() -> void:
+	var is_paused = not get_tree().paused
+	get_tree().paused = is_paused
+	if not is_instance_valid(Globals.hud.get_node("PauseUI")):
+		var gamePauseScene :PackedScene = preload("res://UI/pause_ui.tscn")
+		var gamePause :CanvasLayer = gamePauseScene.instantiate()
+		Globals.hud.add_child(gamePause)
+	else:
+		Globals.hud.get_node("PauseUI").queue_free()

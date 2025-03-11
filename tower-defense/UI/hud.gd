@@ -54,7 +54,7 @@ func place_tower(turret_pos):
 	var turret_instance = load("res://Towers/turret_base.tscn").instantiate()
 	turret_instance.turret_type = curr_tower_type
 	turret_instance.global_position = turret_pos
-	get_parent().add_child(turret_instance)
+	Globals.turretsNode.add_child(turret_instance)
 
 func populate_tower_buttons() -> void:
 	for child in %TowerContainer.get_children():
