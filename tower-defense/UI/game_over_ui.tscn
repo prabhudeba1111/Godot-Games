@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bri3mng5kltre" path="res://Tilesheet/UI/bar_square_large.png" id="4_spx3u"]
 
 [node name="GameOverUI" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_lwbxc")
 
 [node name="CenterPanel" type="Panel" parent="."]

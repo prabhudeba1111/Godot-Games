@@ -18,5 +18,5 @@ func restart_current_level():
 	currentMap.queue_free()
 	var newMap = currentLevelScene.instantiate()
 	newMap.level = selected_map
-	get_node("/root/Main/LevelUI/HUD").occupied_tiles.clear()
+	hud.call_deferred("_ready")
 	mainNode.add_child(newMap)

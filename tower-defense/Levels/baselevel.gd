@@ -17,6 +17,7 @@ var gold :int :
 
 
 func _ready() -> void:
+	get_tree().paused = false
 	Globals.currentMap = self
 	Globals.turretsNode = $Turrets
 	Globals.tileMapNode = $TileMap
@@ -33,6 +34,7 @@ func base_damaged(damage :int) -> void:
 	Globals.baseHpChanged.emit(baseHP)
 	if baseHP <= 0:
 		gameOver = true
+		get_tree().paused = true
 		var gameOverPanelScene :PackedScene = preload("res://UI/game_over_ui.tscn")
 		var gameOverPanel :CanvasLayer = gameOverPanelScene.instantiate()
 		Globals.hud.add_child(gameOverPanel)

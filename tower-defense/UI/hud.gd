@@ -10,10 +10,11 @@ var curr_tower_type: String = ""
 var tower_cost: int 
 var build_mode: bool = false
 var can_build: bool = false
-var occupied_tiles: Array[Vector2i] = []
+var occupied_tiles: Array[Vector2i]
 
 func _ready() -> void:
 	Globals.hud = self
+	occupied_tiles = []
 	Globals.baseHpChanged.connect(updateHealth)
 	Globals.goldChanged.connect(updateMoney)
 	populate_tower_buttons()
