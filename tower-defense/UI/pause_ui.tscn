@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cxopxdbwfxorg"]
 
-[ext_resource type="Script" path="res://UI/pause_ui.gd" id="1_fmup6"]
+[ext_resource type="Script" uid="uid://dbun6s1wlc0po" path="res://UI/pause_ui.gd" id="1_fmup6"]
 [ext_resource type="Texture2D" uid="uid://1pgi27hdlinm" path="res://Tilesheet/UI/panel_glass.png" id="1_uf88q"]
 [ext_resource type="FontFile" uid="uid://b04lxs7mhgy4k" path="res://Tilesheet/Font/BlackOpsOne-Regular.ttf" id="2_77kah"]
 [ext_resource type="Texture2D" uid="uid://consv5l466j48" path="res://Tilesheet/UI/bar_square_gloss_large.png" id="3_y1heb"]

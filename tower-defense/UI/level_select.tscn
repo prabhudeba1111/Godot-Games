@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cftkmrmpri7jv"]
 
-[ext_resource type="Script" path="res://UI/level_select.gd" id="1_74s73"]
+[ext_resource type="Script" uid="uid://bsurqgr5cfwlf" path="res://UI/level_select.gd" id="1_74s73"]
 [ext_resource type="Texture2D" uid="uid://1pgi27hdlinm" path="res://Tilesheet/UI/panel_glass.png" id="2_6hx6u"]
 
 [node name="LevelSelect" type="Control"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=4 uid="uid://cqwu2hynngei7"]
 
-[ext_resource type="Script" path="res://Levels/baselevel.gd" id="1_glosh"]
+[ext_resource type="Script" uid="uid://cp7pprhsp1wab" path="res://Levels/baselevel.gd" id="1_glosh"]
 [ext_resource type="PackedScene" uid="uid://4dvp5urxnon2" path="res://Tilesheet/Tiles/tile_map.tscn" id="1_q1rg7"]
-[ext_resource type="Script" path="res://Enemies/enemy_spawner.gd" id="2_bisev"]
+[ext_resource type="Script" uid="uid://deb1mccuwiefr" path="res://Enemies/enemy_spawner.gd" id="2_bisev"]
 
 [sub_resource type="Curve2D" id="Curve2D_kgdmk"]
 _data = {
