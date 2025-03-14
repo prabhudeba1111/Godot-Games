@@ -9,6 +9,13 @@ var button_scene = preload("res://UI/level_preview.tscn")
 func _ready() -> void:
 	populate_levels()
 
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		get_parent().get_node("Panel").show()
+		queue_free()
+
+
 func populate_levels():
 	for child in level_selection.get_children():
 		child.queue_free()
@@ -23,10 +30,4 @@ func populate_levels():
 
 func select_level(level):
 	Globals.selected_map = level
-	print(GameData.levels[level]["scene"])
-	get_tree().change_scene_to_file(GameData.levels[level]["scene"])
-	#var levelScene :PackedScene = load(GameData.levels[level]["scene"])
-	#print(levelScene)
-	#var curr_level = levelScene.instantiate()
-	#curr_level.level = level
-	#get_tree().change_scene_to_packed(curr_level) 
+	get_tree().change_scene_to_file("res://Main/main.tscn")

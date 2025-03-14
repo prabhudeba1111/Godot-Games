@@ -35,11 +35,3 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not deployed:
 		pass
-
-func draw_range() -> void:
-	draw_circle(Vector2(0,0), attack_range, "3ccd50a9", false, 1, true)
-
-
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if deployed and Input.is_action_pressed("Left Click"):
-		draw_range()

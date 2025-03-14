@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cftkmrmpri7jv"]
+[gd_scene load_steps=3 format=3 uid="uid://cftkmrmpri7jv"]
 
-[ext_resource type="Script" path="res://UI/level_select.gd" id="1_74s73"]
+[ext_resource type="Script" uid="uid://bsurqgr5cfwlf" path="res://UI/level_select.gd" id="1_74s73"]
+[ext_resource type="Texture2D" uid="uid://1pgi27hdlinm" path="res://Tilesheet/UI/panel_glass.png" id="2_6hx6u"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -18,17 +19,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -184.0
-offset_right = 192.0
-offset_bottom = 168.0
+offset_left = -216.0
+offset_top = -198.0
+offset_right = 216.0
+offset_bottom = 198.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LevelContainer" type="VBoxContainer" parent="Panel"]
+[node name="TextureRect" type="TextureRect" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6hx6u")
+
+[node name="LevelContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 22.0
+offset_right = 408.0
+offset_bottom = 366.0
 grow_horizontal = 2
 grow_vertical = 2

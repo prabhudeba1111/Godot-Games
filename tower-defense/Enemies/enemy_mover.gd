@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		finished_path()
 
 func finished_path() -> void:
-	get_parent().get_parent().base_damaged(baseDamage)
+	Globals.currentMap.base_damaged(baseDamage)
 	queue_free()
 
 func take_damage(damage: int) -> void:

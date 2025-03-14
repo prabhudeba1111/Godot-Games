@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://vij40hb7gy7u"]
+
+[ext_resource type="Texture2D" uid="uid://dvr8unns3tr1r" path="res://Tilesheet/PNG/towerDefense_tile250.png" id="1_7u43a"]
+[ext_resource type="FontFile" uid="uid://b04lxs7mhgy4k" path="res://Tilesheet/Font/BlackOpsOne-Regular.ttf" id="2_dk41o"]
+
+[node name="TowerButton" type="Panel"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 0.089
+offset_right = 60.8
+offset_bottom = 58.304
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_7u43a")
+
+[node name="Cost" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_dk41o")
+text = "70"
+horizontal_alignment = 2
+vertical_alignment = 2

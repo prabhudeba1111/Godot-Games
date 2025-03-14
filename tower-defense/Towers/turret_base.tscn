@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxgiv0q1m0ryb"]
 
 [ext_resource type="Texture2D" uid="uid://c1nklj01g3kr6" path="res://Tilesheet/PNG/towerDefense_tile183.png" id="1_juuth"]
-[ext_resource type="Script" path="res://Towers/turret_base.gd" id="1_ut6jf"]
+[ext_resource type="Script" uid="uid://ptgsan7skdoy" path="res://Towers/turret_base.gd" id="1_ut6jf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aukfy"]
 
@@ -15,7 +15,6 @@ scale = Vector2(3.2, 3.2)
 shape = SubResource("RectangleShape2D_aukfy")
 
 [node name="Base" type="Sprite2D" parent="."]
+position = Vector2(0.400002, 0.400002)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_juuth")
-
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

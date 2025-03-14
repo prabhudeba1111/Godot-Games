@@ -1,12 +1,9 @@
 extends Control
 
-var levelSelectContainer
 
 func _on_new_game_button_pressed() -> void:
-	if not levelSelectContainer:
 		var lvlScene := preload("res://UI/level_select.tscn")
 		var lvl := lvlScene.instantiate()
-		levelSelectContainer = lvl
 		add_child(lvl)
 		$Panel.hide()
 

@@ -14,6 +14,10 @@ func ui_animation() -> void:
 	tween.tween_property($CenterPanel, "modulate", Color.WHITE, 0.3)
 	tween.tween_property($CenterPanel, "scale", Vector2(1,1), 0.5)
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://UI/main_menu.tscn")
+
 
 func _on_retry_button_pressed() -> void:
 	Globals.restart_current_level()

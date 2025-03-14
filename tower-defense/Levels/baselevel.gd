@@ -8,64 +8,38 @@ var level :String= "":
 		gold = GameData.levels[val]["startingGold"]
 
 var gameOver :bool = false
-var baseMaxHp :int = 20
-var baseHP :int = baseMaxHp
-var gold :int = 100
+var baseMaxHp :int 
+var baseHP :int
+var gold :int :
+	set(value):
+		gold = value
+		Globals.goldChanged.emit(value)
 
-var occupied_tiles :Array = []
-
-@onready var level_ui :Control = $LevelUI
 
 func _ready() -> void:
+	get_tree().paused = false
 	Globals.currentMap = self
-	Globals.selected_map = "level1"
-	level_ui.updateHealth(baseHP)
-	level_ui.updateMoney(gold)
+	Globals.turretsNode = $Turrets
+	Globals.tileMapNode = $TileMap
+	Globals.baseHpChanged.emit(baseHP)
+	Globals.goldChanged.emit(gold)
+	get_node("/root/Main/LevelUI/HUD").tile_map = $TileMap
 
 
 func base_damaged(damage :int) -> void:
 	if gameOver:
 		return
 	baseHP -= damage
-	$LevelUI.updateHealth(baseHP)
+	baseHP = max(baseHP, 0)
+	Globals.baseHpChanged.emit(baseHP)
 	if baseHP <= 0:
 		gameOver = true
+		get_tree().paused = true
 		var gameOverPanelScene :PackedScene = preload("res://UI/game_over_ui.tscn")
 		var gameOverPanel :CanvasLayer = gameOverPanelScene.instantiate()
-		$LevelUI.add_child(gameOverPanel)
-
-func _input(event :InputEvent) -> void:
-	if event.is_action_pressed("ui_up"):
-		var tilemap :TileMapLayer = get_node("TileMap")
-		var mouse_pos :Vector2 = get_global_mouse_position()
-		var tile_pos :Vector2i = tilemap.local_to_map(mouse_pos)
-		if is_valid_pos(tile_pos):
-			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
-			var turret :Node2D = turretScene.instantiate()
-			turret.position = tilemap.map_to_local(tile_pos)
-			turret.turret_type = GameData.towers.keys()[0]
-			get_node("Turrets").add_child(turret)
-			occupied_tiles.append(tile_pos)
-	if event.is_action_pressed("ui_down"):
-		var tilemap :TileMapLayer = get_node("TileMap")
-		var mouse_pos :Vector2 = get_global_mouse_position()
-		var tile_pos :Vector2i = tilemap.local_to_map(mouse_pos)
-		if is_valid_pos(tile_pos):
-			var turretScene :PackedScene = preload("res://Towers/turret_base.tscn")
-			var turret :Node2D = turretScene.instantiate()
-			turret.position = tilemap.map_to_local(tile_pos)
-			turret.turret_type = GameData.towers.keys()[1]
-			get_node("Turrets").add_child(turret)
-			occupied_tiles.append(tile_pos)
-
-
-func is_valid_pos(tile_pos: Vector2i) -> bool:
-	var tile_map :TileMapLayer = get_node("TileMap")
-	var tile_id :Vector2i = tile_map.get_cell_atlas_coords(tile_pos)
-	var invalid_turret_tiles :Array = [Vector2i(1, 4), Vector2i(21, 2), Vector2i(22, 2)]
-	return not tile_id in invalid_turret_tiles and not tile_pos in occupied_tiles
+		Globals.hud.add_child(gameOverPanel)
 
 
 func _on_enemy_mover_dead(goldYeild: int) -> void:
 	gold += goldYeild
-	level_ui.updateMoney(gold)
+	Globals.goldChanged.emit(gold)
