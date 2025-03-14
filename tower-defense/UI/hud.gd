@@ -4,15 +4,17 @@ extends Control
 
 
 var button_scene = preload("res://UI/tower_button.tscn")
-var curr_preview: Sprite2D = null
-var curr_range: Node2D = null
+var curr_preview: Sprite2D
+var curr_range: Node2D
 var curr_tower_type: String = ""
 var tower_cost: int 
-var build_mode: bool = false
+var build_mode: bool
 var can_build: bool = false
 var occupied_tiles: Array[Vector2i]
 
 func _ready() -> void:
+	cancel_build_mode()
+	
 	Globals.hud = self
 	occupied_tiles = []
 	Globals.baseHpChanged.connect(updateHealth)
