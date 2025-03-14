@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkv7u870kv6hb"]
 
-[ext_resource type="Script" path="res://paddle.gd" id="1_cfdi7"]
+[ext_resource type="Script" uid="uid://ckdpbuartxa2y" path="res://paddle.gd" id="1_cfdi7"]
 [ext_resource type="Texture2D" uid="uid://dxcb4s0u61hjl" path="res://assets/Bouncy Platform Long.png" id="1_n6rij"]
 
 [node name="Paddle" type="CharacterBody2D"]
