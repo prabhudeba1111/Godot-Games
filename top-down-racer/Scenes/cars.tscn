@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgcnvsuiqnkxx"]
+[gd_scene load_steps=5 format=3 uid="uid://dgcnvsuiqnkxx"]
 
 [ext_resource type="Script" uid="uid://baxm1isvob1pu" path="res://Scenes/Scripts/cars.gd" id="1_euxeg"]
+[ext_resource type="AudioStream" uid="uid://beqo3qma3mrie" path="res://Assets/Audio/car engine.ogg" id="2_f1n1r"]
 [ext_resource type="Texture2D" uid="uid://s1fjdhcyn7dn" path="res://Assets/Cars/Sedan/sedan_blue.png" id="2_idy40"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n1r"]
@@ -13,6 +14,11 @@ script = ExtResource("1_euxeg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_f1n1r")
+
+[node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_f1n1r")
+autoplay = true
+playback_type = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

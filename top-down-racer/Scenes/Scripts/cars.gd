@@ -1,38 +1,91 @@
 extends CharacterBody2D
 
-const ACCELERATION := 400.0
-const MAX_SPEED := 200.0
-const FRICTION := 300.0
-const TURN_SPEED := 2.5  # Lower values for more gradual turning
-const TRACTION := 5.0     # Higher values reduce drifting
+@onready var engine_sound: AudioStreamPlayer2D = $EngineSound
+
+# Car properties
+var wheel_base: int = 56  # Distance between front/rear wheels
+var steering_angle: float = 15.0  # Maximum steering angle in degrees
+var engine_power: int = 800
+var friction: float = -0.9
+var drag: float = -0.001
+var braking: int = -450
+var max_speed: int = 1500  # Added max speed limit
+var max_reverse_speed: int = 200
+var slip_speed: int = 400
+var traction_fast: float = 0.2
+var traction_slow: float = 0.8
+var acceleration: Vector2 = Vector2.ZERO
+var steer_direction: float
+
+func _ready() -> void:
+	# Ensure engine sound loops
+	if engine_sound:
+		engine_sound.stream.loop = true
 
 func _physics_process(delta: float) -> void:
-	var throttle_input := Input.get_axis("ui_down", "ui_up")
-	var forward_vector := Vector2.RIGHT.rotated(rotation)
+	acceleration = Vector2.ZERO
+	get_input()
+	apply_friction()
+	calculate_steering(delta)
 	
-	# Acceleration/Deceleration
-	if throttle_input != 0.0:
-		velocity += forward_vector * ACCELERATION * throttle_input * delta
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	# Apply acceleration
+	velocity += acceleration * delta
 	
-	# Steering calculation
-	var speed_squared := velocity.length_squared()
-	if speed_squared > 25.0:  # Equivalent to speed > 5.0 (5^2 = 25)
-		var speed := sqrt(speed_squared)
-		var turn_direction := Input.get_axis("ui_left", "ui_right")
-		
-		# Reverse steering direction when moving backward
-		turn_direction *= -1.0 if throttle_input < 0.0 else 1.0
-		
-		# Speed-sensitive steering with traction effect
-		rotation += turn_direction * TURN_SPEED * delta * (speed / MAX_SPEED)
-	
-	# Traction system
-	var forward_velocity = velocity.project(forward_vector)
-	velocity = forward_velocity + (velocity - forward_velocity) / TRACTION
-	
-	# Speed limiting
-	velocity = velocity.limit_length(MAX_SPEED)
+	# Limit speed
+	var speed = velocity.length()
+	if speed > max_speed:
+		velocity = velocity.normalized() * max_speed
+	elif speed > max_reverse_speed and velocity.dot(transform.x) < 0:
+		velocity = velocity.normalized() * max_reverse_speed
 	
 	move_and_slide()
+	_update_engine_sound()
+
+func get_input() -> void:
+	var turn = Input.get_action_strength("steer_right") - Input.get_action_strength("steer_left")
+	steer_direction = turn * deg_to_rad(steering_angle)
+	
+	if Input.is_action_pressed("accelerate"):
+		acceleration = transform.x * engine_power
+	if Input.is_action_pressed("brake"):
+		acceleration = transform.x * braking
+
+func apply_friction() -> void:
+	# Stop the car if it's moving very slowly
+	if velocity.length_squared() < 25:
+		velocity = Vector2.ZERO
+		return
+		
+	# Apply friction and drag forces
+	var friction_force = velocity * friction
+	var drag_force = velocity * velocity.length() * drag
+	acceleration += friction_force + drag_force
+
+func calculate_steering(delta: float) -> void:
+	var rear_wheel = position - transform.x * wheel_base / 2.0
+	var front_wheel = position + transform.x * wheel_base / 2.0
+	rear_wheel += velocity * delta
+	front_wheel += velocity.rotated(steer_direction) * delta
+	
+	var new_heading = (front_wheel - rear_wheel).normalized()
+	
+	# Apply traction based on speed
+	var traction = lerp(traction_slow, traction_fast, velocity.length() / slip_speed)
+	var d = new_heading.dot(velocity.normalized())
+	
+	if d > 0:
+		velocity = lerp(velocity, new_heading * velocity.length(), traction)
+	elif d < 0:
+		velocity = lerp(velocity, -new_heading * velocity.length(), traction)
+	
+	rotation = new_heading.angle()
+
+func _update_engine_sound() -> void:
+	if not engine_sound:
+		return
+		
+	if not engine_sound.playing:
+		engine_sound.play()
+	
+	var speed_ratio = clamp(velocity.length() / max_speed, 0.0, 1.0)
+	engine_sound.pitch_scale = lerp(0.8, 2.2, speed_ratio)
