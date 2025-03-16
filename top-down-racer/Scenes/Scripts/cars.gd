@@ -5,14 +5,14 @@ extends CharacterBody2D
 # Car properties
 var wheel_base: int = 56  # Distance between front/rear wheels
 var steering_angle: float = 15.0  # Maximum steering angle in degrees
-var engine_power: int = 800
+var engine_power: int = 950
 var friction: float = -0.9
 var drag: float = -0.001
 var braking: int = -450
 var max_speed: int = 1500  # Added max speed limit
 var max_reverse_speed: int = 200
 var slip_speed: int = 400
-var traction_fast: float = 0.2
+var traction_fast: float = 0.3
 var traction_slow: float = 0.8
 var acceleration: Vector2 = Vector2.ZERO
 var steer_direction: float

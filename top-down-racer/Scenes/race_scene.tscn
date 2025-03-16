@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://vqiugtyfuton"]
+
+[ext_resource type="PackedScene" uid="uid://ctnetadk71lo8" path="res://Scenes/environment.tscn" id="1_jgpcp"]
+[ext_resource type="PackedScene" uid="uid://dgcnvsuiqnkxx" path="res://Scenes/car.tscn" id="1_kkfrs"]
+[ext_resource type="Script" uid="uid://cvsqiu15fpy0d" path="res://Scenes/Scripts/race_manager.gd" id="2_jgpcp"]
+
+[node name="RaceScene" type="Node2D"]
+
+[node name="Environment" parent="." instance=ExtResource("1_jgpcp")]
+
+[node name="GameElements" type="Node2D" parent="."]
+
+[node name="Player" parent="GameElements" instance=ExtResource("1_kkfrs")]
+position = Vector2(1460, 214)
+
+[node name="Camera2D" type="Camera2D" parent="GameElements/Player"]
+position_smoothing_enabled = true
+
+[node name="RaceManager" type="Node2D" parent="GameElements"]
+script = ExtResource("2_jgpcp")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="RaceInfo" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LapTime" type="Label" parent="UI/RaceInfo"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 46.0
+grow_horizontal = 0
+text = "Lap: 00:00.00"
+horizontal_alignment = 2
+
+[node name="BestLap" type="Label" parent="UI/RaceInfo"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 50.0
+offset_right = -20.0
+offset_bottom = 76.0
+grow_horizontal = 0
+text = "Best: 00:00.00"
+horizontal_alignment = 2
+
+[node name="CurrentLap" type="Label" parent="UI/RaceInfo"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 80.0
+offset_right = -20.0
+offset_bottom = 106.0
+grow_horizontal = 0
+text = "Lap: 1/3"
+horizontal_alignment = 2
