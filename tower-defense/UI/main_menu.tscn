@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://b04lxs7mhgy4k" path="res://Tilesheet/Font/BlackOpsOne-Regular.ttf" id="4_2c0rq"]
 
 [node name="MainMenu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
