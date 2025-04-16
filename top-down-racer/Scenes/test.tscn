@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1x2e53adhumw"]
+
+[ext_resource type="PackedScene" uid="uid://dgcnvsuiqnkxx" path="res://Scenes/car.tscn" id="1_lc1oi"]
+
+[node name="test" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -828.0
+offset_top = -613.0
+offset_right = 1728.0
+offset_bottom = 1066.0
+color = Color(0.181047, 0.452312, 0.217822, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-828, -613)
+build_mode = 1
+polygon = PackedVector2Array(-1, -2, 2, 1674, 2557, 1681, 2560, 5)
+
+[node name="Cars" parent="." instance=ExtResource("1_lc1oi")]
+position = Vector2(500, 299)
+
+[node name="Camera2D" type="Camera2D" parent="Cars"]
+zoom = Vector2(2, 2)
